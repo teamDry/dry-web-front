@@ -1,0 +1,6 @@
+.no-copy {
+    user-select: none; /* 텍스트 선택 비활성화 */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
