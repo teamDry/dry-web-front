@@ -17,14 +17,14 @@ const DashBoardItemBox = styled.section`
     flex-direction: row;
 `
 
-interface DashBoardProps {
+interface DashBoardMainProps {
     reportCount: number, // !TODO : 수정예정
     peopleCount: number,
     boardCount: number,
     issueCount: number
 }
 
-const DashBoard = (props: DashBoardProps) => {
+const DashBoardMain = (props: DashBoardMainProps) => {
     const boardItems = [{ // !TODO : 수정예정
         name: "New Report",
         count: props.reportCount,
@@ -56,4 +56,4 @@ const DashBoard = (props: DashBoardProps) => {
 
 }
 
-export default DashBoard
+export default DashBoardMain

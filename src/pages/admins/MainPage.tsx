@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from '../../components/admins/common/Header';
 import SideMenu from '../../components/admins/common/SideMenu';
-import DashBoard from '../../components/admins/dashboard/DashBoard';
+import DashBoardMain from '../../components/admins/dashboard/DashBoardMain';
 
 
 const MainBody = styled.div`
@@ -30,7 +30,7 @@ const MainPage = () => {
                 <SideMenu />
                 <Routes>
                     {/* 임의로 하드코딩함, 수정예정 */}
-                    <Route path="/" element={<DashBoard reportCount={26} boardCount={12} issueCount={13} peopleCount={11} />} /> 
+                    <Route path="/main" element={<DashBoardMain reportCount={26} boardCount={12} issueCount={13} peopleCount={11} />} /> 
                 </Routes>
             </MainContentDiv>
         </MainBody>
