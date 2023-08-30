@@ -9,8 +9,9 @@ const AdminApp = () => {
 
   return (
     <Routes>
-      <Route path="main" element={<MainPage />} />
+      <Route path="main/*" element={<MainPage />} />
       <Route path="/" element={<LoginPage />} />
+      <Route path="/sign-up/" element={<SignUpPage />} />
     </Routes>
   )
 
