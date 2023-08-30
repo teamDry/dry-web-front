@@ -30,7 +30,7 @@ const MainPage = () => {
                 <SideMenu />
                 <Routes>
                     {/* 임의로 하드코딩함, 수정예정 */}
-                    <Route path="/main" element={<DashBoardMain reportCount={26} boardCount={12} issueCount={13} peopleCount={11} />} /> 
+                    <Route path="dashboard" element={<DashBoardMain reportCount={26} boardCount={12} issueCount={13} peopleCount={11} />} /> 
                 </Routes>
             </MainContentDiv>
         </MainBody>
