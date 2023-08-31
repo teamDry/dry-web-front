@@ -1,9 +1,13 @@
-import React, { Component } from 'react';
 import styled from 'styled-components'
-import { prefixAdminImagePath } from '../../../utils/admins/AdminUtil';
+import { getAxios, prefixAdminImagePath } from '../../../utils/admins/AdminUtil';
 import LoginOption from './LoginOption';
 import LoginInput from './LoginInput';
-import axios from 'axios';
+import store from '../../../Store';
+import { idBlur, loginSuccess, passwordBlur } from '../../../actions/admins/Actions';
+import { useSelector } from 'react-redux';
+import { LoginState } from '../../../reducers/AdminReducer';
+import { useState } from 'react';
+import FormButton from '../common/FormButton';
 
 const LoginMainDiv = styled.main`
     width: 60%;
@@ -15,36 +19,45 @@ const LoginMainDiv = styled.main`
 const LoginMainInput = styled.div`
     display: flex;
     flex-direction: column;
+    align-items: center;
 `
 
-const LoginMain = () => {
+interface LoginMainProps {
+    submit: () => void;
+}
+
+const LoginMain = (props: LoginMainProps) => {
     const inputData = [{
         type: "text",
         id: "id",
         img: prefixAdminImagePath("login-user.svg"),
         name: "id",
-        placeholder: "ID"
+        placeholder: "ID",
+        onBlur: (e: React.ChangeEvent<HTMLInputElement>) => {
+            store.dispatch(idBlur(e.target.value.trim()));
+        }
     }, {
         type: "password",
         id: "password",
         img: prefixAdminImagePath("login-password.svg"),
         name: "password",
-        placeholder: "PASSWORD"
+        placeholder: "PASSWORD",
+        onBlur: (e: React.ChangeEvent<HTMLInputElement>) => {
+            store.dispatch(passwordBlur(e.target.value.trim()));
+        }
     }]
 
-    function requestLogin() {
-        return axios.post('http://localhost:8080/api/admins/login')
-        .then(response => response.data)
-        .catch(error => {
-            alert("로그인 에러");
-        })
+    const onKeyDown = (e: React.KeyboardEvent) => {
+        if(e.key === 'Enter') {
+            props.submit();
+        }
     }
 
     return (
         <LoginMainDiv>
             <LoginMainInput>
                 {inputData.map((item, index) => (
-                    <LoginInput key={index} type={item.type} name={item.name} id={item.id} img={item.img} placeholder={item.placeholder} />
+                    <LoginInput key={index} type={item.type} name={item.name} id={item.id} img={item.img} placeholder={item.placeholder} onBlur={item.onBlur} onKeyDown={onKeyDown}/>
                 ))}
                 <LoginOption />
             </LoginMainInput>

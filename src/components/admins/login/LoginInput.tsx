@@ -45,7 +45,9 @@ interface LoginInputProps {
     type: string,
     id: string,
     placeholder: string,
-    name: string
+    name: string,
+    onBlur: (e: React.ChangeEvent<HTMLInputElement>) => void,
+    onKeyDown: (e: React.KeyboardEvent) => void,
 }
 
 const LoginInput = (props: LoginInputProps) => {
@@ -53,7 +55,7 @@ const LoginInput = (props: LoginInputProps) => {
     return (
         <LoginInputDiv>
             <LoginInputImg src={props.img} />
-            <LoginInputInput type={props.type} name={props.name} id={props.id} placeholder={props.placeholder} autoComplete='off' />
+            <LoginInputInput type={props.type} name={props.name} id={props.id} placeholder={props.placeholder} autoComplete='off' onBlur={props.onBlur} onKeyDown={props.onKeyDown} />
         </LoginInputDiv>
 
     )
