@@ -1,6 +1,6 @@
 import { produce } from "immer";
-import { Admin, IdAndPassword, LoginAction } from "../actions/admins/Actions";
-import { ActionTypes } from "../actions/admins/ActionTypes";
+import { IdAndPassword, LoginAction } from "../../actions/admins/LoginActions";
+import { ActionTypes, Admin } from "../../actions/admins/ActionTypes";
 
 // Login과 관련된 상태 정의
 export interface LoginState {
@@ -12,7 +12,7 @@ export interface LoginState {
     alertText: string;
 }
 
-// 초기값
+// 상태 초기값
 export const initialState: LoginState = {
     admin: null,
     isLoginFailed: false,
@@ -25,8 +25,8 @@ export const initialState: LoginState = {
 // 액션 타입 받아서, 액션에 따라 상태 변경
 const AdminLoginReducer = (state = initialState, action: LoginAction): LoginState => {
     return produce(state, draft => { // state를 베이스로 draft로 객체 변경 후 리턴 >> 불변성 유지
-        switch (action.type) {
-            case ActionTypes.LOGIN_REQUEST:
+        switch (action.type) { // 들어온 Action Type에 따라서 액션 변경
+            case ActionTypes.LOGIN_REQUEST: 
                 draft.idAndPassword = action.payload;
                 break;
             
@@ -40,14 +40,6 @@ const AdminLoginReducer = (state = initialState, action: LoginAction): LoginStat
 
             case ActionTypes.LOGIN_FAILED:
                 draft.alertText = action.payload;
-                break;
-
-            case ActionTypes.ID_BLUR:
-                draft.id = action.payload;
-                break;
-            
-            case ActionTypes.PASSWORD_BLUR:
-                draft.password = action.payload;
                 break;
 
             default:
