@@ -1,13 +1,10 @@
-import React, { Component, useState } from 'react';
 import styled from 'styled-components'
 import LoginMain from '../../components/admins/login/LoginMain';
 import FormHeader from '../../components/admins/common/FormHeader';
 import FormButton from '../../components/admins/common/FormButton';
-import store from '../../Store';
-import { loginFailed, loginSuccess } from '../../actions/admins/Actions';
-import { getAxios } from '../../utils/admins/AdminUtil';
-import { useSelector } from 'react-redux';
 import { RootState } from '../../reducers/RootReducer';
+import { loginRequest } from '../../components/admins/login/LoginLogic';
+import { useSelector } from 'react-redux';
 
 const LoginPageBody = styled.div`
     height: 100vh;
@@ -36,41 +33,14 @@ const LoginFailedMessage = styled.span`
     font-weight: bold;
 `
 const LoginPage = () => {
+    // useSelector로 상태 가져와야 store에서 변경된 상태값을 인식하여 값이 바뀜
     const textData = useSelector((state: RootState) => state.adminLogin.alertText);
-
-    const loginRequest = async () => {
-        console.log(textData);
-        try {
-            const axiosInstance = getAxios();
-            const currentState = store.getState();
-
-            const data = {
-                id: currentState.adminLogin.id,
-                password: currentState.adminLogin.password
-            }
-            const response = await axiosInstance.post('/api/admins/login', data);
-            if (response.status === 200) {
-                store.dispatch(loginSuccess(response.data));
-                window.location.href = '/admins/main/dashboard'
-            }
-        } catch (error) {
-            store.dispatch(loginFailed(`You have entered the wrong ID or PASSWORD.`));
-        } 
-        
-
-    }
-
-    const handleKeyDown = (e: React.KeyboardEvent) => {
-        if (e.key === 'Enter') {
-            loginRequest();
-        }
-    }
 
     return (
         <LoginPageBody>
             <LoginPageContainer>
                 <FormHeader img="login-login.svg" text="ADMIN LOGIN" />
-                <LoginMain submit={loginRequest} />
+                <LoginMain />
                 <FormButton onClick={loginRequest} text="LOGIN" />
                 <LoginFailedMessage>{textData}</LoginFailedMessage>
             </LoginPageContainer>
