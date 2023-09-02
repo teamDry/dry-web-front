@@ -1,5 +1,3 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'; // Routes로 변경
 import AdminApp from './pages/admins/AdminApp';
 
