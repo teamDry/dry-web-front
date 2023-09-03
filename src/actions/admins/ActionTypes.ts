@@ -1,10 +1,29 @@
+// Action Type 상수 정의
 export const ActionTypes = {
+    // Login Action
     LOGIN_REQUEST: 'LOGIN_REQUEST',
     LOGIN_SUCCESS: 'LOGIN_SUCCESS',
     LOGIN_FAILED: 'LOGIN_FAILED',
+
+    // Input Action
     ID_BLUR: 'ID_BLUR',
-    PASSWORD_BLUR: 'PASSWORD_BLUR'
+    PASSWORD_BLUR: 'PASSWORD_BLUR',
+    NICKNAME_BLUR: 'NICKNAME_BLUR',
+    
+    // SignUp Action
+    ID_CHECK: 'ID_CHECK',
+    PASSWORD_CHECK: 'PASSWORD_CHECK',
+    PASSWORD_RECHECK: 'PASSWORD_RECHECK',
+    NICKNAME_CHECK: 'NICKNAME_CHECK'
 } as const
+
+// 공용으로 사용할 V.O
+export interface Admin {
+    id: string,
+    password: string,
+    nickname: string,
+    email: string
+}
 
 
 

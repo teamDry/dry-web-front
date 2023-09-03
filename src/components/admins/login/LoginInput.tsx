@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import styled from 'styled-components'
 
 const LoginInputImg = styled.img`
@@ -32,21 +32,20 @@ const LoginInputDiv = styled.div`
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    
-
 `
 
 const CheckSign = styled.span`
     margin-top: 16px;
     margin-left: 16px;
 `
+// LoginInput Component를 만들 때 필요한 데이터 정의
 interface LoginInputProps {
     img: string,
     type: string,
     id: string,
     placeholder: string,
     name: string,
-    onBlur: (e: React.ChangeEvent<HTMLInputElement>) => void,
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
     onKeyDown: (e: React.KeyboardEvent) => void,
 }
 
@@ -55,9 +54,8 @@ const LoginInput = (props: LoginInputProps) => {
     return (
         <LoginInputDiv>
             <LoginInputImg src={props.img} />
-            <LoginInputInput type={props.type} name={props.name} id={props.id} placeholder={props.placeholder} autoComplete='off' onBlur={props.onBlur} onKeyDown={props.onKeyDown} />
+            <LoginInputInput type={props.type} name={props.name} id={props.id} placeholder={props.placeholder} autoComplete='off' onChange={props.onChange} onKeyDown={props.onKeyDown} />
         </LoginInputDiv>
-
     )
 
 }

@@ -1,5 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import styled, { keyframes } from 'styled-components'
+import { Checkable } from '../../../actions/admins/SignUpActions';
+import { RED_DOT } from './static/SignUpLogic';
+import './static/sign-up.css'
 
 const colorAnimation = keyframes`
     0% {
@@ -28,10 +31,9 @@ const SignUpInputInput = styled.input`
     font-size: 36px;
     border-bottom: 2px solid black;
     margin-left: 16px;
-    margin-bottom: 36px;
+    margin-bottom: 12px;
     border: none;
     border-bottom: 2px solid black;
-    padding-bottom: 8px;
 
     &:focus {
         animation: ${colorAnimation} 5s infinite;
@@ -47,6 +49,8 @@ const SignUpInputInput = styled.input`
 const CheckSign = styled.span`
     margin-top: 20px;
     margin-left: 24px;
+    color: black;
+    font-size: 24px;
 `
 const SignUpInputImg = styled.img`
     width: 36px;
@@ -55,21 +59,40 @@ const SignUpInputImg = styled.img`
     user-drag: none;
 `
 
+const WarningMessage = styled.span`
+    margin-bottom: 36px;
+    font-size: 16px;
+    color: red;
+    font-family: 'Noto Sans KR', sans-serif;
+    margin-left: 54px;
+`
+
+const SignUpInputContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    height: 8vh;
+`
+
 interface SignUpInputBoxProps {
     img: string,
     type: string,
     id: string,
-    placeholder: string
+    name: string,
+    placeholder: string,
+    onBlur: (e: React.ChangeEvent<HTMLInputElement>) => void,
+    data: Checkable | null
 }
 
 const SignUpInputBox = (props: SignUpInputBoxProps) => {
-
     return (
-        <SignUpInputBoxDiv>
-            <SignUpInputImg className="no-copy" src={props.img} />
-            <SignUpInputInput type={props.type} id={props.id} placeholder={props.placeholder} autoComplete='off' />
-            <CheckSign>●</CheckSign>
-        </SignUpInputBoxDiv>
+        <SignUpInputContainer>
+            <SignUpInputBoxDiv>
+                <SignUpInputImg className="no-copy" src={props.img} />
+                <SignUpInputInput type={props.type} id={props.id} name={props.name} placeholder={props.placeholder} autoComplete='off' onBlur={props.onBlur} />
+                <CheckSign className={"no-copy " + props.data?.signColor}>●</CheckSign>
+            </SignUpInputBoxDiv>
+            {(props.data?.signColor === RED_DOT) && <WarningMessage className="no-copy">{props.data?.text}</WarningMessage>}
+        </SignUpInputContainer>
     )
 
 }

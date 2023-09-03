@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import styled from 'styled-components'
-import { prefixAdminImagePath } from '../../../utils/admins/AdminUtil';
 import FormHeader from '../common/FormHeader';
 import FormButton from '../common/FormButton';
 import SignUpInputMain from './SignUpInputMain';
+import { signUpRequest } from './static/SignUpLogic';
 
 const SignUpContainer = styled.div`
     width: 40%;
@@ -21,7 +21,7 @@ const SignUpMain = () => {
         <SignUpContainer>
             <FormHeader img="signup-signup.svg" text="ADMIN SIGN-UP" />
             <SignUpInputMain />
-            <FormButton onClick={() => null} text="SIGN UP" />
+            <FormButton onClick={signUpRequest} text="SIGN UP" />
         </SignUpContainer>
     )
 }
